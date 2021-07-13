@@ -8,8 +8,8 @@
 import SwiftUI
 
 
+class MemoryGameViewModel:ObservableObject {
 
-class MemoryGameViewModel {
     
     static let emojis=["🚗","🚕","🚙","🚌","🚎","🏎","🚓","🚑","🚒","🚐","🛻","🚚","🚛","🚜","🦯","🦽","🦼","🛴","🚲","🛵","🏍","🛺","🚨","🚔"]
     
@@ -19,11 +19,15 @@ class MemoryGameViewModel {
            }
     }
     
-    private var model: MemoryGameModel<String> = createMemoryGame()
-    
-    
+    @Published private var model: MemoryGameModel<String> = createMemoryGame()
     
     var cards: Array<MemoryGameModel<String>.Card>{
         return model.cards
     }
+    
+    // MARK: - Intent(s)
+    func choose(_ card:MemoryGameModel<String>.Card){
+        model.choose(card)
+    }
+    
 }
