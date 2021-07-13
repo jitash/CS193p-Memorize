@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD309237269D541A006AA1A0 /* AspectVGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD309236269D541A006AA1A0 /* AspectVGrid.swift */; };
+		AD309239269D608B006AA1A0 /* Pie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD309238269D608B006AA1A0 /* Pie.swift */; };
 		AD4E1B79269C388300A105F2 /* CS193p_MemorizeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E1B78269C388300A105F2 /* CS193p_MemorizeApp.swift */; };
 		AD4E1B7B269C388300A105F2 /* MemoryGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E1B7A269C388300A105F2 /* MemoryGameView.swift */; };
 		AD4E1B7D269C388500A105F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD4E1B7C269C388500A105F2 /* Assets.xcassets */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AD309236269D541A006AA1A0 /* AspectVGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AspectVGrid.swift; sourceTree = "<group>"; };
+		AD309238269D608B006AA1A0 /* Pie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pie.swift; sourceTree = "<group>"; };
 		AD4E1B75269C388300A105F2 /* CS193p-Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CS193p-Memorize.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD4E1B78269C388300A105F2 /* CS193p_MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CS193p_MemorizeApp.swift; sourceTree = "<group>"; };
 		AD4E1B7A269C388300A105F2 /* MemoryGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGameView.swift; sourceTree = "<group>"; };
@@ -58,7 +62,9 @@
 			children = (
 				AD4E1B78269C388300A105F2 /* CS193p_MemorizeApp.swift */,
 				AD4E1B7A269C388300A105F2 /* MemoryGameView.swift */,
+				AD309238269D608B006AA1A0 /* Pie.swift */,
 				AD4E1B87269C460D00A105F2 /* MemoryGameModel.swift */,
+				AD309236269D541A006AA1A0 /* AspectVGrid.swift */,
 				AD4E1B89269C464900A105F2 /* MemoryGameViewModel.swift */,
 				AD4E1B7C269C388500A105F2 /* Assets.xcassets */,
 				AD4E1B81269C388500A105F2 /* Info.plist */,
@@ -144,9 +150,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD309239269D608B006AA1A0 /* Pie.swift in Sources */,
 				AD4E1B88269C460D00A105F2 /* MemoryGameModel.swift in Sources */,
 				AD4E1B7B269C388300A105F2 /* MemoryGameView.swift in Sources */,
 				AD4E1B79269C388300A105F2 /* CS193p_MemorizeApp.swift in Sources */,
+				AD309237269D541A006AA1A0 /* AspectVGrid.swift in Sources */,
 				AD4E1B8A269C464900A105F2 /* MemoryGameViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

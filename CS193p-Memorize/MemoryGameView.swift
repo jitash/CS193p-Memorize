@@ -11,17 +11,14 @@ struct MemoryGameView: View {
     @ObservedObject var viewModel:MemoryGameViewModel
     
     var body: some View {
-            ScrollView{
-                
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))]){
-                    ForEach(viewModel.cards){card in
-                        CardView(card: card)
-                            .aspectRatio(2/3,contentMode: .fit)
-                            .onTapGesture {
-                                viewModel.choose(card)
-                            }
+        ScrollView{
+            AspectVGrid(items: viewModel.cards, aspectRatio: 2/3, content: {card in
+                CardView(card: card)
+                    .padding(4)
+                    .onTapGesture {
+                        viewModel.choose(card)
                     }
-                }
+            }).foregroundColor(.red)
         }.padding(.all)
     }
     
@@ -37,6 +34,9 @@ struct CardView:View {
                 if card.isFaceUp{
                     shape.fill().foregroundColor(.white)
                     shape.stroke(lineWidth: DrawingConstans.lineWidth)
+                    
+                            Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 120-90)).padding(10).opacity(0.6)
+                    
                     Text(card.content).font(font(in: geometry.size))
                 } else if card.isMatched{
                     shape.opacity(0)
@@ -51,9 +51,9 @@ struct CardView:View {
         Font.system(size: min(size.width,size.height) * DrawingConstans.fontScale)
     }
     private struct DrawingConstans{
-        static let cornerRadius:CGFloat = 20
+        static let cornerRadius:CGFloat = 10
         static let lineWidth:CGFloat = 3
-        static let fontScale:CGFloat = 0.8
+        static let fontScale:CGFloat = 0.65
     }
 }
 
