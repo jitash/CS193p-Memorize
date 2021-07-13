@@ -7,8 +7,13 @@
 
 import Foundation
 struct MemoryGameModel<CardContent> where CardContent:Equatable {
+    
     private(set) var cards:Array<Card>
-    private var indexOfTheOneAndOnlyFaceUpCard:Int?
+    
+    private var indexOfTheOneAndOnlyFaceUpCard:Int?{
+        get{cards.indices.filter{cards[$0].isFaceUp}.oneAndOnly}
+        set{cards.indices.forEach{cards[$0].isFaceUp = ($0 == newValue)}}
+    }
     
     mutating func choose(_ card:Card) {
         if let chosenIndex = cards.firstIndex(where: {$0.id == card.id}),
@@ -18,24 +23,17 @@ struct MemoryGameModel<CardContent> where CardContent:Equatable {
                 if cards[potentialMatchIndex].content == cards[chosenIndex].content{
                     cards[potentialMatchIndex].isMatched = true
                     cards[chosenIndex].isMatched = true
-                    
                 }
-                indexOfTheOneAndOnlyFaceUpCard = nil
+                cards[chosenIndex].isFaceUp = true
             }else{
-                for index in cards.indices{
-                    cards[index].isFaceUp=false
-                }
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
-            cards[chosenIndex].isFaceUp.toggle()
         }
-        print("\(cards)")
-        
         
     }
     
     init(numberOfPairsOfCards:Int,createCardContent:(Int) ->CardContent) {
-        cards = Array<Card>()
+        cards = []
         //todo add numberOfPairsOfCards x 2  cards to cards array
         for pairIndex in 0..<numberOfPairsOfCards {
             let content:CardContent = createCardContent(pairIndex)
@@ -46,10 +44,23 @@ struct MemoryGameModel<CardContent> where CardContent:Equatable {
     }
     
     struct Card:Identifiable{
-        var id:Int
+        let id:Int
         
-        var isFaceUp = false
+        var isFaceUp = true
         var isMatched = false
-        var content:CardContent
+        let content:CardContent
     }
+    
+    
+}
+
+extension Array{
+    var oneAndOnly:Element?{
+        if count == 1{
+            return first
+        }else{
+            return nil
+        }
+    }
+    
 }
