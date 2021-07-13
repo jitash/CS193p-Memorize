@@ -12,7 +12,7 @@ struct CS193p_MemorizeApp: App {
     private let game = MemoryGameViewModel()
     var body: some Scene {
         WindowGroup {
-            MemoryGameView(viewModel: game)
+            MemoryGameView(game: game)
         }
     }
 }

@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct MemoryGameView: View {
-    @ObservedObject var viewModel:MemoryGameViewModel
+    @ObservedObject var game:MemoryGameViewModel
     
     var body: some View {
         ScrollView{
-            AspectVGrid(items: viewModel.cards, aspectRatio: 2/3, content: {card in
-                CardView(card: card)
-                    .padding(4)
-                    .onTapGesture {
-                        viewModel.choose(card)
-                    }
+            AspectVGrid(items: game.cards, aspectRatio: 2/3, content: {card in
+                if card.isMatched && !card.isFaceUp{
+                    Rectangle().opacity(0)
+                }else{
+                    CardView(card: card)
+                        .padding(4)
+                        .onTapGesture {
+                            game.choose(card)
+                        }
+                }
             }).foregroundColor(.red)
         }.padding(.all)
     }
@@ -30,30 +34,27 @@ struct CardView:View {
     var body: some View{
         GeometryReader(content: { geometry in
             ZStack{
-                let shape = RoundedRectangle(cornerRadius: DrawingConstans.cornerRadius)
-                if card.isFaceUp{
-                    shape.fill().foregroundColor(.white)
-                    shape.stroke(lineWidth: DrawingConstans.lineWidth)
-                    
-                            Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 120-90)).padding(10).opacity(0.6)
-                    
-                    Text(card.content).font(font(in: geometry.size))
-                } else if card.isMatched{
-                    shape.opacity(0)
-                } else{
-                    shape.fill()
-                }
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 120-90))
+                    .padding(8)
+                    .opacity(0.6)
+                Text(card.content)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(Animation.linear(duration: 2).repeatForever(autoreverses: false))
+                    .font(Font.system(size: DrawingConstans.fontSize))
+                    .scaleEffect(scale(thatFits:geometry.size))
             }
+            .modifier(Cardify(isFaceUp: card.isFaceUp))
+            
         })
         
     }
-    private func font(in size:CGSize) -> Font{
-        Font.system(size: min(size.width,size.height) * DrawingConstans.fontScale)
+    private func scale(thatFits size:CGSize) -> CGFloat{
+        min(size.width,size.height)/(DrawingConstans.fontSize / DrawingConstans.fontScale)
     }
+    
     private struct DrawingConstans{
-        static let cornerRadius:CGFloat = 10
-        static let lineWidth:CGFloat = 3
         static let fontScale:CGFloat = 0.65
+        static let fontSize:CGFloat = 32
     }
 }
 
@@ -77,6 +78,6 @@ struct CardView:View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game  = MemoryGameViewModel()
-        MemoryGameView(viewModel: game)
+        MemoryGameView(game: game)
     }
 }
