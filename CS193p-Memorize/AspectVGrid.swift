@@ -56,7 +56,6 @@ struct AspectVGrid<Item,ItemView>:View where ItemView:View,Item:Identifiable {
         if columnCount > itemCount{
             columnCount = itemCount
         }
-        print("columnCount:\(columnCount)")
         return floor(size.width / CGFloat(columnCount))
     }
 }
